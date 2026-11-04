@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>المحتوى التعليمي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Baloo+Bhaijaan+2:wght@600;700;800&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script>document.documentElement.classList.add('gated')</script>
+</head>
+<body>
+<nav><div class="wrap inner">
+    <div class="brand">
+      <a class="logo" href="index.html"><span class="icon-orb">📖</span> التعلم المعكوس</a>
+      <span class="badge">النمط الثاني: أنشطة موجهة</span>
+    </div>
+    <div class="links">
+      <a href="index.html">الصفحة الرئيسية</a>
+      <a href="content.html" class="active">المحتوى التعليمي</a>
+      <a href="instructions.html">التعليمات</a>
+      <a href="contact.html">التواصل</a>
+    </div>
+  </div></nav>
+<main class="wrap">
+<h2 class="serif center" style="color:var(--teal-dark)">المحتوى التعليمي</h2>
+  <p class="center muted" style="margin-bottom:34px">ثلاث وحدات تعليمية — اختر الوحدة وادخل إلى دروسها</p>
+  <div class="grid3">
+    <a class="mod-card" href="module1.html">
+      <span class="mod-emoji">👨‍👩‍👧</span>
+      <span class="mod-badge">١</span>
+      <p class="eyebrow" style="margin:6px 0 2px">الموديول الأول</p>
+      <h3>القيم الأسرية والاجتماعية</h3>
+      <span class="mod-count">3 دروس</span>
+    </a>
+    <a class="mod-card" href="module2.html">
+      <span class="mod-emoji">📚</span>
+      <span class="mod-badge">٢</span>
+      <p class="eyebrow" style="margin:6px 0 2px">الموديول الثاني</p>
+      <h3>قيمة القراءة والعلم</h3>
+      <span class="mod-count">3 دروس</span>
+    </a>
+    <a class="mod-card" href="module3.html">
+      <span class="mod-emoji">🛠️</span>
+      <span class="mod-badge">٣</span>
+      <p class="eyebrow" style="margin:6px 0 2px">الموديول الثالث</p>
+      <h3>العمل وبناء المستقبل</h3>
+      <span class="mod-count">3 دروس</span>
+    </a>
+  </div>
+  <script>
+    const PW_MOD = {1:"1000",2:"2000",3:"3000"};
+    let pendingMod=null;
+    function tryOpenModule(id){ pendingMod=id; const m=document.getElementById('pwModal'); m.style.display='flex';
+      document.getElementById('pwInput').value=''; document.getElementById('pwError').style.display='none';
+      document.getElementById('pwInput').focus(); }
+    function closePw(){ document.getElementById('pwModal').style.display='none'; }
+    function checkPw(){ if(document.getElementById('pwInput').value===PW_MOD[pendingMod]){ window.location.href='module'+pendingMod+'.html'; }
+      else document.getElementById('pwError').style.display='block'; }
+    document.getElementById('pwInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter') checkPw(); });
+  </script>
+  <a class="proj-card jr-entry" href="lessons/Lesson13_journey.html"><span class="pc-ic">🚂</span><span><b>🏁 النشاط الختامي: رحلة قطار الهولوجرام</b><small>من الفصل إلى المستقبل — عشر عربات، وخريطة مصر تكتمل بكم (يُفتح بعد إنهاء الدروس التسعة)</small></span><span class="pc-go">اركب القطار ←</span></a>
+  <a class="proj-card ex-entry" href="lessons/Lesson14_exam.html"><span class="pc-ic">📝</span><span><b>🎓 الاختبار النهائي في القراءة التشاركية</b><small>نصّان قرائيان و٦٠ سؤالًا — يُفتح بعد إنهاء الدروس التسعة، ويُسلَّم مرة واحدة</small></span><span class="pc-go">ابدأ الاختبار ←</span></a>
+</main>
+<script src="assets/firebase-config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/db.js"></script>
+<script src="assets/engine.js"></script>
+</body>
+</html>

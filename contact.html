@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>التواصل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Baloo+Bhaijaan+2:wght@600;700;800&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fa/css/fontawesome.min.css">
+<link rel="stylesheet" href="assets/fa/css/brands.min.css">
+<link rel="stylesheet" href="assets/style.css">
+<script>document.documentElement.classList.add('gated')</script>
+</head>
+<body>
+<nav><div class="wrap inner">
+    <div class="brand">
+      <a class="logo" href="index.html"><span class="icon-orb">📖</span> التعلم المعكوس</a>
+      <span class="badge">النمط الثاني: أنشطة موجهة</span>
+    </div>
+    <div class="links">
+      <a href="index.html">الصفحة الرئيسية</a>
+      <a href="content.html">المحتوى التعليمي</a>
+      <a href="instructions.html">التعليمات</a>
+      <a href="contact.html" class="active">التواصل</a>
+    </div>
+  </div></nav>
+<main class="wrap">
+  <div class="ct-head center"><span class="ct-badge">💬</span><h2 class="serif" style="color:var(--teal-dark);margin:6px 0 2px">تواصل مع الباحثة</h2>
+    <p class="muted" style="margin:0;font-weight:700">عندك سؤال أو واجهتك مشكلة؟ اختر الطريقة المناسبة لك وراسلنا</p></div>
+  <div class="ct-grid">
+    <a class="ct-card wa" id="ct-wa" href="#" target="_blank" rel="noopener"><span class="ct-ic"><i class="fa-brands fa-whatsapp"></i></span><b>واتساب</b><span class="ct-sub">رسالة سريعة على رقم الباحثة<br><b dir="ltr" style="font-size:1.05em">01032688516</b></span><span class="ct-btn">راسلنا على واتساب ←</span></a>
+    <a class="ct-card ms" id="ct-ms" href="#" target="_blank" rel="noopener"><span class="ct-ic"><i class="fa-brands fa-facebook-messenger"></i></span><b>ماسنجر</b><span class="ct-sub">راسلنا عبر فيسبوك ماسنجر<br><span class="ct-fb" onclick="event.preventDefault();event.stopPropagation();window.open('https://www.facebook.com/profile.php?id=61573158178712','_blank')">👤 زيارة صفحة الفيسبوك</span></span><span class="ct-btn">راسلنا على ماسنجر ←</span></a>
+  </div>
+  <p class="center muted" style="font-size:13px;margin-top:clamp(10px,2.6vh,24px)">⏰ نرد على الرسائل في أقرب وقت خلال أيام الدراسة</p>
+  <script>
+    /* ===== عدّل بيانات التواصل هنا فقط ===== */
+    const CONTACT = {
+      whatsapp: '201032688516',  // رقم الواتساب بالصيغة الدولية بدون + أو أصفار في البداية (مثال: 201012345678)
+      messenger: '61573158178712'  // رقم حساب فيسبوك (رابط ماسنجر m.me/...)
+    };
+    document.getElementById('ct-wa').href='https://wa.me/'+CONTACT.whatsapp+'?text='+encodeURIComponent('السلام عليكم، أنا طالب في بيئة التعلم المعكوس وعندي استفسار:');
+    document.getElementById('ct-ms').href='https://m.me/'+CONTACT.messenger;
+  </script>
+</main>
+<script src="assets/firebase-config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/db.js"></script>
+<script src="assets/engine.js"></script>
+</body>
+</html>

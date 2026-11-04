@@ -1,0 +1,40 @@
+rules_version = '2';
+// قواعد Firestore — انسخها في: Firebase Console → Firestore Database → Rules
+// بريد المشرف: hind@gmail.com (نفس البريد في assets/firebase-config.js)
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() { return signedIn() && (request.auth.token.email in ['hind@gmail.com'] || request.auth.uid == 'PWAfIgLXzzS2GZZsvbOE66A1fUK2'); }
+    function myPattern() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.pattern; }
+    function ownsId(id) { return signedIn() && id.split('_')[0] == request.auth.uid; }
+
+    // حسابات الطلاب: يقرأ الطالب بياناته فقط، والمشرف يدير الجميع
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow write: if isAdmin();
+    }
+    // التقدم في الدروس
+    match /progress/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+      allow read: if isAdmin();
+    }
+    // كل الإجابات والأنشطة (يكتبها الطالب، يقرؤها المشرف)
+    match /responses/{id} {
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+      allow read, delete: if isAdmin();
+    }
+    // التظليل وثمرة القراءة والتصويت (مستند لكل طالب في كل درس)
+    match /highlights/{id} { allow read, write: if ownsId(id) || isAdmin(); }
+    match /harvest/{id}    { allow read, write: if ownsId(id) || isAdmin(); }
+    match /votes/{id} {
+      allow write: if ownsId(id);
+      allow read: if isAdmin() || (signedIn() && resource.data.pattern == myPattern());
+    }
+    // التعليقات: يراها زملاء نفس المجموعة فقط (لا تداخل بين الحر والموجه)
+    match /comments/{id} {
+      allow read: if isAdmin() || (signedIn() && resource.data.pattern == myPattern());
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid && request.resource.data.pattern == myPattern();
+      allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+  }
+}

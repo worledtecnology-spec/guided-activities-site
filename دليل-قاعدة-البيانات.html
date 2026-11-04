@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>دليل ربط قاعدة البيانات</title>
+<style>
+body{font-family:Tahoma,Arial,sans-serif;background:#F8F7FC;color:#17123A;line-height:1.9;margin:0;padding:24px}
+.w{max-width:860px;margin:auto;background:#fff;border:2px solid #E3D6FF;border-radius:18px;padding:24px 30px}
+h1{color:#5B21B6;margin-top:0}h2{color:#7C3AED;border-bottom:2px solid #F1EAFF;padding-bottom:4px}
+code,pre{background:#F3EEFF;border-radius:6px;padding:2px 6px;direction:ltr;unicode-bidi:embed}pre{padding:12px;overflow:auto;text-align:left}
+.n{background:#FFFBEB;border:2px dashed #FCD34D;border-radius:12px;padding:10px 14px}
+li{margin-bottom:6px}
+</style><script>document.documentElement.classList.add('gated')</script>
+</head><body><div class="w">
+<h1>🔥 دليل ربط المنصة بقاعدة بيانات Firebase</h1>
+<p class="n">قبل الربط تعمل المنصة في <b>«وضع تجريبي»</b>: كل شيء يعمل لكن البيانات تُحفظ على الجهاز نفسه فقط (للتجربة). بعد الربط تُحفظ كل البيانات في حسابك على Firebase، ويرى الطلاب تعليقات زملائهم من أي جهاز.</p>
+
+<h2>١) إنشاء المشروع</h2>
+<ol>
+<li>ادخل <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a> ← <b>Add project</b> ← اكتب اسمًا (مثل flipped-learning).</li>
+<li>من الصفحة الرئيسية للمشروع اضغط أيقونة الويب <code>&lt;/&gt;</code> ← سجّل تطبيقًا ← سيظهر لك <code>firebaseConfig</code>.</li>
+<li>✅ تم: بيانات مشروعك <b>reading-a40c1</b> مضافة بالفعل في الموقعين.</li>
+</ol>
+
+<h2>٢) تفعيل الخدمات</h2>
+<ol>
+<li><b>Authentication</b> ← Get started ← Sign-in method ← فعّل <b>Email/Password</b>.</li>
+<li><b>Firestore Database</b> ← Create database ← اختر Production mode ← المنطقة الأقرب (مثل europe-west).</li>
+<li><b>Storage</b> ← Get started (لرفع صور وفيديوهات وتسجيلات الأنشطة الحرة). <i>اختياري:</i> يحتاج خطة Blaze. بدونه تُحفظ الملفات الصغيرة (حتى ٧٠٠ كيلوبايت) داخل قاعدة البيانات نفسها.</li>
+</ol>
+
+<h2>٣) حساب المشرف</h2>
+<ol>
+<li>✅ تم: حساب المشرف <code>hind@gmail.com</code> مضاف بالفعل في Authentication ومكتوب في الموقعين وملفات القواعد.</li>
+<li>هذا البريد مكتوب جاهزًا في الموقعين وفي ملفات القواعد، فلا تحتاج تعديل أي ملف. عند دخول المشرف يكفي كتابة <b>admin</b> وكلمة المرور.</li>
+</ol>
+
+<h2>٤) قواعد الأمان (مهم جدًا)</h2>
+<ol>
+<li>Firestore ← <b>Rules</b> ← امسح الموجود والصق محتوى الملف <code>firestore.rules</code> ← <b>Publish</b>.</li>
+<li>Storage ← <b>Rules</b> ← الصق محتوى <code>storage.rules</code> ← <b>Publish</b>.</li>
+</ol>
+<p>هذه القواعد تضمن: الطالب يرى بياناته فقط، والتعليقات يراها زملاء <b>نفس المجموعة</b> فقط (لا تداخل بين الحر والموجه)، والمشرف يرى كل شيء.</p>
+
+<h2>٥) إضافة الطلاب</h2>
+<ol>
+<li>افتح <code>admin.html</code> من أي من الموقعين ← ادخل ببريد المشرف.</li>
+<li>تبويب «👥 الطلاب»: أضف الطالب (الاسم، اسم مستخدم إنجليزي، كلمة مرور ٦ أحرف+، الفصل، <b>المجموعة: حرة أو موجهة</b>)، أو الصق قائمة كاملة (كل سطر: الاسم، اسم المستخدم، كلمة المرور، الفصل).</li>
+<li>الطالب يدخل من زر «👤 دخول الطالب» باسم المستخدم وكلمة المرور. لو دخل من موقع المجموعة الأخرى ستظهر له رسالة توجهه لموقعه الصحيح.</li>
+</ol>
+
+<h2>٦) ماذا يُحفظ في قاعدة البيانات؟</h2>
+<ul>
+<li><b>users</b>: حسابات الطلاب ومجموعاتهم.</li>
+<li><b>progress</b>: الخطوات التي أنجزها كل طالب في كل درس (يكمل من أي جهاز).</li>
+<li><b>responses</b>: كل الإجابات: التصويت، وقفات الفيديو، صندوق الفهم، الأنشطة (مع روابط الملفات)، تذكرة الخروج، التقويم والاختبار البعدي.</li>
+<li><b>comments</b>: نقاش الطلاب تحت كل فقرة (مع الردود).</li>
+<li><b>highlights</b>: تظليل كل طالب بالألوان الثلاثة.</li>
+<li><b>harvest</b>: «ثمرة قراءتي» لكل طالب في كل درس.</li>
+<li><b>votes</b>: تصويت التهيئة.</li>
+</ul>
+<p>كل ذلك يظهر في لوحة المشرف مع زر «⬇️ تصدير CSV» يفتح في Excel.</p>
+
+<h2>٧) النشر على الإنترنت</h2>
+<p>ارفع مجلد كل موقع على أي استضافة (مثل Firebase Hosting أو Netlify أو GitHub Pages). ثم من Authentication ← Settings ← <b>Authorized domains</b> أضف نطاق الموقع.</p>
+<p class="n">ملحوظة: حذف حساب طالب نهائيًا يتم من Firebase Console ← Authentication. من لوحة المشرف يمكنك «إيقاف» الحساب فيُمنع من الدخول.</p>
+</div><script src="assets/firebase-config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/db.js"></script>
+<script src="assets/engine.js"></script>
+</body></html>
