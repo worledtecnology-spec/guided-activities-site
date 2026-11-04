@@ -1411,3 +1411,15 @@ a.seq-done{border-color:#86EFAC!important}
 .pt-form{width:100%;justify-content:center}.pt-form .auth-card{width:min(440px,100%)}
 @media (max-width:700px){ .pt-cards{grid-template-columns:1fr} .pt-logos{gap:8px} .pt-lg.sq{width:58px;height:58px;border-radius:14px;padding:4px} .pt-lg.rd{width:62px;height:62px} .pt-mid h1{font-size:17px} }
 .pt-btn{font-family:inherit;font-weight:800;font-size:15.5px}.auth-pop.portal,.auth-pop.portal *{font-family:var(--font,inherit)}
+/* بوابة الدخول بألوان التصميم الأساسي */
+.auth-pop.portal{background:radial-gradient(900px 500px at 85% 0%,rgba(236,72,153,.14),transparent 60%),radial-gradient(900px 520px at 10% 100%,rgba(124,58,237,.16),transparent 60%),linear-gradient(160deg,#F8F5FF 0%,#FDF7FB 100%)}
+.pt-lg.sq,.pt-lg.rd{box-shadow:0 10px 26px rgba(124,58,237,.18);border:2px solid #EDE5FF}
+.pt-mid h1{color:transparent;background:linear-gradient(135deg,#5B21B6,#7C3AED 45%,#DB2777);-webkit-background-clip:text;background-clip:text;text-shadow:none}
+.pt-sub{color:#DB2777;background:#fff;border:2px solid #FBCFE8;border-radius:999px;padding:4px 16px}
+.pt-card{border-top:6px solid #7C3AED;box-shadow:0 18px 40px rgba(124,58,237,.16);border-inline:2px solid #F1EAFF;border-bottom:2px solid #F1EAFF}
+.pt-card.ad{border-top-color:#EC4899}
+.pt-ic{background:#F3EEFF}.pt-card.ad .pt-ic{background:#FDF2F8}
+.pt-card h3{color:#5B21B6}
+.pt-btn,.pt-btn.ad{color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);box-shadow:0 10px 22px rgba(124,58,237,.3)}
+.pt-btn.ad{background:linear-gradient(135deg,#EC4899,#7C3AED)}
+@media (max-width:700px){.pt-sub{font-size:13.5px;white-space:nowrap;padding:3px 12px}}
