@@ -161,7 +161,38 @@ window.FLDB=DB;
 /* ================= واجهة تسجيل الدخول ================= */
 const $=(s,r=document)=>r.querySelector(s);
 function h(html){ const t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstElementChild; }
+function portal(){ // شاشة البوابة: الشعارات + عنوان البيئة + بوابتا الطالب والباحثة
+  return new Promise(resolve=>{ $$rm(); const up=location.pathname.includes('/lessons/')?'../':'';
+    const pat=(window.SITE&&window.SITE.mode)==='free'?'النمط الأول: الأنشطة الحرة':'النمط الثاني: الأنشطة الموجهة';
+    const m=h(`<div class="auth-pop portal"><div class="pt-in">
+      <div class="pt-logos"><img class="pt-lg sq" src="${up}assets/img/logo_zu.png" alt="جامعة الزقازيق"><div class="pt-mid"><img class="pt-lg rd" src="${up}assets/img/logo_dept.png" alt="">
+        <h1>بيئة تعلم معكوس لتنمية مهارات القراءة التشاركية باللغة العربية والتقبل التكنولوجي لدى تلاميذ الصف الثالث الإعدادي</h1>
+        <p class="pt-sub">${pat}</p></div><img class="pt-lg sq" src="${up}assets/img/logo_fse.png" alt="كلية التربية النوعية"></div>
+      <div class="pt-cards"><div class="pt-card st"><span class="pt-ic">🎓</span><h3>بوابة دخول الطالب</h3><p>ادخل باسم المستخدم وكلمة المرور اللي أعطتها لك المعلمة… وابدأ رحلة التعلم</p><button class="pt-btn st">ابدأ الرحلة ←</button></div>
+        <div class="pt-card ad"><span class="pt-ic">🔐</span><h3>بوابة دخول الباحثة</h3><p>لوحة المتابعة: الطلاب والتقدّم والردود والتعليقات ونتائج الاختبار</p><button class="pt-btn ad">تسجيل الدخول ←</button></div></div>
+      <div class="pt-form" style="display:none"></div></div></div>`);
+    document.body.appendChild(m);
+    const form=$('.pt-form',m), cards=$('.pt-cards',m);
+    const open=admin=>{ cards.style.display='none'; form.style.display='flex';
+      form.innerHTML=`<div class="auth-card"><div class="auth-head"><span class="auth-ic">${admin?'🔐':'🎓'}</span><div><h3>${admin?'دخول الباحثة':'دخول الطالب'}</h3><p>${admin?'لوحة متابعة الطلاب والنتائج':'ادخل باسم المستخدم وكلمة المرور'}</p></div></div>
+        <label class="auth-l">${admin?(LIVE?'البريد الإلكتروني أو admin':'اسم المستخدم'):'اسم المستخدم'}<input class="field au" dir="ltr" autocomplete="username" placeholder="${admin?'admin':'ahmed.ali'}"></label>
+        <label class="auth-l">كلمة المرور<input class="field ap" type="password" dir="ltr" autocomplete="current-password"></label><p class="auth-err"></p>
+        <div class="row"><button class="b b-main go" style="flex:1;justify-content:center">دخول ←</button><button class="b b-ghost bk">→ رجوع</button></div>
+        ${LIVE?'':`<p class="auth-demo">🧪 وضع تجريبي: ${admin?'admin / admin':'أنشئ حساب طالب من بوابة الباحثة أولًا'}</p>`}</div>`;
+      const u=$('.au',form), p=$('.ap',form), e=$('.auth-err',form), go=$('.go',form); setTimeout(()=>u.focus(),50);
+      const submit=async()=>{ e.textContent=''; go.disabled=true; go.textContent='جارٍ الدخول…';
+        try{ const r=admin?await DB.loginAdmin(u.value,p.value):await DB.loginStudent(u.value,p.value);
+          if(admin&&!document.body.classList.contains('admin-page')){ location.href=up+'admin.html'; return; }
+          m.remove(); paintChip(); resolve(r); }
+        catch(x){ e.textContent=x.message; const c=$('.auth-card',form); c.classList.add('shake'); setTimeout(()=>c.classList.remove('shake'),450); }
+        go.disabled=false; go.textContent='دخول ←'; };
+      go.onclick=submit; [u,p].forEach(i=>i.addEventListener('keydown',ev=>{ if(ev.key==='Enter') submit(); }));
+      $('.bk',form).onclick=()=>{ form.style.display='none'; cards.style.display=''; }; };
+    $('.pt-btn.st',m).onclick=()=>open(false); $('.pt-btn.ad',m).onclick=()=>open(true);
+    $('.pt-card.st',m).onclick=e=>{ if(e.target.tagName!=='BUTTON') open(false); }; $('.pt-card.ad',m).onclick=e=>{ if(e.target.tagName!=='BUTTON') open(true); };
+  }); }
 function loginModal({admin=false,block=false}={}){
+  if(block) return portal();
   return new Promise(resolve=>{
     $$rm();
     const m=h(`<div class="auth-pop ${block?'block':''}"><div class="auth-card">

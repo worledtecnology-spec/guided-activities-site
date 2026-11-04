@@ -1391,3 +1391,23 @@ button.auth-back{border:none;background:none;cursor:pointer;font:inherit;font-we
 a.seq-off{filter:grayscale(.85);opacity:.6;cursor:not-allowed}a.seq-off:hover{transform:none}
 a.seq-done{border-color:#86EFAC!important}
 .seq-off .ready-tag{display:none}.seq-lock .medal{font-size:clamp(44px,8vh,64px)}
+/* ===== بوابة الدخول ===== */
+.auth-pop.portal{background:radial-gradient(1200px 600px at 80% -10%,#2B3F7A 0%,transparent 60%),linear-gradient(160deg,#0F1D45 0%,#162A5C 55%,#1C3270 100%);align-items:center;overflow-y:auto;padding:clamp(14px,3vh,30px) 16px}
+.pt-in{width:min(1000px,100%);display:flex;flex-direction:column;align-items:center;gap:clamp(16px,3.4vh,34px);margin:auto}
+.pt-logos{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;width:100%}
+.pt-lg.sq{width:clamp(70px,11vh,100px);height:clamp(70px,11vh,100px);object-fit:contain;background:#fff;border-radius:22px;padding:8px;box-shadow:0 12px 30px rgba(0,0,0,.3);flex-shrink:0}
+.pt-mid{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.pt-lg.rd{width:clamp(70px,11vh,92px);height:clamp(70px,11vh,92px);border-radius:50%;background:#fff;padding:5px;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.pt-mid h1{margin:0;color:#fff;font-size:clamp(19px,3.5vh,30px);line-height:1.6;font-weight:800;text-shadow:0 2px 16px rgba(0,0,0,.3)}
+.pt-sub{margin:0;color:#E9B44C;font-weight:800;font-size:clamp(14px,2.2vh,17px)}
+.pt-cards{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.4vw,26px);width:100%}
+.pt-card{background:#fff;border-radius:28px;padding:clamp(18px,3.6vh,32px) 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;border-top:6px solid #E9B44C;box-shadow:0 22px 50px rgba(0,0,0,.28);transition:transform .25s}
+.pt-card.ad{border-top-color:#3B6FD8}.pt-card:hover{transform:translateY(-5px)}
+.pt-ic{width:clamp(58px,9vh,78px);height:clamp(58px,9vh,78px);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:clamp(28px,4.4vh,38px);background:#FDF3DF}
+.pt-card.ad .pt-ic{background:#E7EEFC}
+.pt-card h3{margin:0;font-size:clamp(19px,3vh,25px);color:#14213D}.pt-card p{margin:0;color:#6B7280;font-weight:600;line-height:1.8;font-size:clamp(13px,1.9vh,15px)}
+.pt-btn{margin-top:6px;border:0;border-radius:999px;padding:12px 28px;font:800 15px inherit;font-family:inherit;cursor:pointer;color:#14213D;background:linear-gradient(135deg,#F6CF79,#E9A93A);box-shadow:0 10px 22px rgba(233,169,58,.35)}
+.pt-btn.ad{color:#fff;background:linear-gradient(135deg,#1C2E5E,#0F1D45);box-shadow:0 10px 22px rgba(15,29,69,.35)}
+.pt-form{width:100%;justify-content:center}.pt-form .auth-card{width:min(440px,100%)}
+@media (max-width:700px){ .pt-cards{grid-template-columns:1fr} .pt-logos{gap:8px} .pt-lg.sq{width:58px;height:58px;border-radius:14px;padding:4px} .pt-lg.rd{width:62px;height:62px} .pt-mid h1{font-size:17px} }
+.pt-btn{font-family:inherit;font-weight:800;font-size:15.5px}.auth-pop.portal,.auth-pop.portal *{font-family:var(--font,inherit)}
